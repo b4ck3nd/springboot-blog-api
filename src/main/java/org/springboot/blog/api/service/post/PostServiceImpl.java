@@ -17,7 +17,7 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public void add(PostCreateRequestDto dto) {
-        
+
     }
 
     @Override
