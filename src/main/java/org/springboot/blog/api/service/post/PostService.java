@@ -13,5 +13,8 @@ public interface PostService {
     PostResponseDto updateById(long id, PostUpdateDto dto);
     void deleteById(long id);
 
+    List<PostResponseDto> findAllPostsWithPageableAndSort(int pageNo,int pageSize,String sortBy,String sortDir);
+
+
 
 }

@@ -8,9 +8,13 @@ import org.springboot.blog.api.dto.post.PostResponseDto;
 import org.springboot.blog.api.dto.post.PostUpdateDto;
 import org.springboot.blog.api.model.Post;
 import org.springboot.blog.api.repository.PostRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
+import org.springframework.data.domain.Sort;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -70,5 +74,16 @@ public class PostServiceImpl implements PostService {
             throw new RuntimeException("error");
         }
 
+    }
+
+    @Override
+    public List<PostResponseDto> findAllPostsWithPageableAndSort(int pageNo, int pageSize, String sortBy, String sortDir) {
+        Sort sort=sortDir.equalsIgnoreCase(Sort.Direction.ASC.name()) ? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();
+        Pageable pageable= PageRequest.of(pageNo,pageSize,sort);
+        Page<Post> posts=postRepository.findAll(pageable);
+        List<Post> postList=posts.getContent();
+        List<PostResponseDto> content=postList.stream().map(post -> mapper.map(post, PostResponseDto.class)).collect(Collectors.toList());
+
+        return content;
     }
 }
