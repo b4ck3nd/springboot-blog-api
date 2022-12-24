@@ -1,9 +1,6 @@
 package org.springboot.blog.api.controller;
 
 
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.PostConstruct;
-import jakarta.persistence.PostUpdate;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springboot.blog.api.dto.post.PostCreateRequestDto;
