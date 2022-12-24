@@ -35,13 +35,13 @@ public class PostController {
 
     @GetMapping("/{id}")
     public ResponseEntity<PostResponseDto> findById(@PathVariable long id) {
-        PostResponseDto post = postService.findById(id);
-        return new ResponseEntity<>(post,HttpStatus.OK);
+        PostResponseDto postResponseDto = postService.findById(id);
+        return new ResponseEntity<>(postResponseDto,HttpStatus.OK);
     }
     @PostMapping("/{id}/update")
     public ResponseEntity<PostResponseDto> updateById(@PathVariable long id, @RequestBody @Valid PostUpdateDto dto) {
-        PostResponseDto post = postService.updateById(id, dto);
-        return new ResponseEntity<>(post,HttpStatus.OK);
+        PostResponseDto postResponseDto = postService.updateById(id, dto);
+        return new ResponseEntity<>(postResponseDto,HttpStatus.OK);
     }
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<String> deleteById(@PathVariable long id) {
