@@ -9,6 +9,7 @@ import org.springboot.blog.api.dto.post.PostUpdateDto;
 import org.springboot.blog.api.service.post.PostService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +25,7 @@ public class PostController {
         return new ResponseEntity<>(postService.findAll(), HttpStatus.OK);
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/add")
     public ResponseEntity<String> createPost(@RequestBody @Valid PostCreateRequestDto dto) {
         postService.add(dto);
@@ -35,11 +37,15 @@ public class PostController {
         PostResponseDto postResponseDto = postService.findById(id);
         return new ResponseEntity<>(postResponseDto,HttpStatus.OK);
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/{id}/update")
     public ResponseEntity<PostResponseDto> updateById(@PathVariable long id, @RequestBody @Valid PostUpdateDto dto) {
         PostResponseDto postResponseDto = postService.updateById(id, dto);
         return new ResponseEntity<>(postResponseDto,HttpStatus.OK);
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("/{id}/delete")
     public ResponseEntity<String> deleteById(@PathVariable long id) {
         postService.deleteById(id);

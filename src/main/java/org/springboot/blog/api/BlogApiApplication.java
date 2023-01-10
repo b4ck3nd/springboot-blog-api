@@ -22,11 +22,6 @@ public class BlogApiApplication {
 
 	@PostConstruct
 	private void postConstruct() {
-		Role roleUser=new Role();
-		roleUser.setName("ROLE_USER");
-		roleRepository.save(roleUser);
-
-		
 		Role roleAdmin=new Role();
 		roleAdmin.setName("ROLE_ADMIN");
 		roleRepository.save(roleAdmin);
