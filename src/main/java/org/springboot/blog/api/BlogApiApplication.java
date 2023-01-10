@@ -22,10 +22,14 @@ public class BlogApiApplication {
 
 	@PostConstruct
 	private void postConstruct() {
-		Optional<Role> roleUser = roleRepository.findByName("ROLE_USER");
+		Role roleUser=new Role();
+		roleUser.setName("ROLE_USER");
+		roleRepository.save(roleUser);
 
-		roleRepository.sa
-
+		
+		Role roleAdmin=new Role();
+		roleAdmin.setName("ROLE_ADMIN");
+		roleRepository.save(roleAdmin);
 	}
 
 }
